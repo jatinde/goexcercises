@@ -15,7 +15,23 @@ func main() {
 	numsChannel := make(chan int64)
 	go emitNumbers(numsChannel)
 
+	n, ok := <-numsChannel
+	if ok {
+		fmt.Printf("hgghghgh%d\n", n)
+	} else {
+		fmt.Printf("no value present")
+	}
+
 	for num := range numsChannel {
-		fmt.Printf("%d\n", num)
+		if ok {
+			fmt.Printf("%d\n", num)
+		}
+	}
+
+	n, ok = <-numsChannel
+	if ok {
+		fmt.Printf("hgghghgh%d\n", n)
+	} else {
+		fmt.Printf("no value present")
 	}
 }
